@@ -13,7 +13,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class BlogService {
-
     private final BlogRepository blogRepository;
 
     public Article save(AddArticleRequest request) {
@@ -26,7 +25,7 @@ public class BlogService {
 
     public Article findById(long id) {
         return blogRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found:" + id));
+                .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
     }
 
     public void delete(long id) {
@@ -37,8 +36,7 @@ public class BlogService {
     public Article update(long id, UpdateArticleRequest request) {
         Article article = blogRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found: " + id));
-        article.update(request.getTitle(), request.getContent());
+        article.update(request.getTitle(), request.getContent(), request.getImageUrl());
         return article;
     }
-
 }
